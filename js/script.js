@@ -1,45 +1,59 @@
 (function () {
     'use strict';
 
-    const $singUp = document.getElementById('singUp');
-    const $labels = document.querySelectorAll('label');
-    const $label = document.querySelector('.checkboxRadial');
+    const $labels = document.querySelector('.labels');
     const $email = document.querySelector('.email');
     const $form = document.querySelector('.form');
+    const $check = document.querySelectorAll('.checkboxRadial');
+    let selected = 0;
+    let checkbox = document.myform.checkbox;
+    let valid = false;
 
     $form.addEventListener('submit', authenticateClick);
     function authenticateClick(e) {
+        selected = 0;
+        $check.forEach(function (el) {
+            
+            if (el.checked) {
+                selected++;
+            }
+        });
+        if (selected === 0 || !$email.value) {
+            alert("preencha os não selecionados!");
+        } else if(selected > 0 || $email.value){
+            alert('Informações enviadas com sucesso!');
+
+        }
         if (!$email.value) {
             $email.style.cssText =
                 'border: 2px solid magenta;';
-            alert('Preencha os campos vazios:');
+            // alert('Preencha os campos vazios:');
             e.preventDefault();
 
-        }
-            
-            if (!$labels[0].checked && !$labels[1].checked) {
-                console.log($labels[i]);
-                $label.style.cssText = 'color: magenta;' +
-                    'border: 2px solid magenta;';
-                e.preventDefault();
-            }
-               
-            
-           
-            /* else if(!$labels[i-1].checked && $labels[i].checked){
-                $labels[i].style.cssText = 'color: magenta;' +
-                    'border: 2px solid magenta;';
-                e.preventDefault();
-            } */
-            
+        } else {
+
+            $email.style.cssText = 'border:none;';
         }
 
-        /* let $radio = document.querySelectorAll('#label');
-        for (var i = 0; i < radios.length; i++) {
-            if (radios[i].checked) {
-                console.log("Escolheu: " + radios[i].value);
+        for (let i = 0; i < checkbox.length; i++) {
+            if (checkbox[i].checked) {
+                valid = true;
+                break;
             }
-        } */
-        return $singUp;
-    
+        }
+        if (valid) {
+            // alert('Informações enviadas com sucesso!');
+            e.preventDefault();
+            $labels.style.cssText = 'border:none';
+
+        } else {
+            $labels.style.cssText = 'border: 2px solid magenta;' +
+                'box-sizing:border-box';
+            e.preventDefault();
+            return false;
+        }
+        
+
+        console.log(selected);
+    }
 })();
