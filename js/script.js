@@ -19,7 +19,7 @@
             }
         });
         if (selected === 0 || !$email.value) {
-            alert("preencha os não selecionados!");
+            alert("preencha os selecionados!");
         } else if(selected > 0 || $email.value){
             alert('Informações enviadas com sucesso!');
 
